@@ -1,0 +1,14 @@
+title 0.6 single page app new note
+
+Selain->Palvelin: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+
+note over Palvelin:
+Syöte lisätään palvelimen JSON tiedostoon
+end note
+
+Palvelin-->Selain: 201 Created
+
+note over Selain:
+Selain lisää JSON tiedostoon syötteen
+ja renderöi muistiinpanot uudestaan
+end note
