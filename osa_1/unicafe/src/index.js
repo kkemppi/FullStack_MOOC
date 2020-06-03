@@ -12,11 +12,13 @@ const Statistics = ({good, neutral, bad}) => {
   }
   return (
     <div>
+      <table>
         <StatisticLine text = "good" value = {good}/>
         <StatisticLine text = "neutral" value = {neutral}/>
         <StatisticLine text = "bad" value = {bad}/>
         <StatisticLine text = "average" value = {(good - bad) / sum}/>
         <StatisticLine text = "positive" value = {(good / sum) * 100 + " %"}/>
+      </table>
     </div>
   )
 }
@@ -29,7 +31,12 @@ const Button = ({onClick, text}) => {
 
 const StatisticLine = ({text, value, mark}) => {
   return (
-   <div>{text} {value} <br/></div>
+      <tbody>
+        <tr>
+          <td>{text}</td>
+          <td>{value}</td>
+        </tr>
+      </tbody>
   )
 }
 
