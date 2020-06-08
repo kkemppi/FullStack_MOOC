@@ -26,8 +26,8 @@ const App = (props) => {
       <p>
         {props.anecdotes[selected]} <br/>
         has {votes[selected]} votes <br/>
-      <button onClick={() => setVotes(vote(votes, selected, setBiggest))}>vote</button>
-      <button onClick={() => setSelected(getRandom())}>next anecdote</button>
+        <button onClick={() => setVotes(vote(votes, selected, setBiggest))}>vote</button>
+        <button onClick={() => setSelected(getRandom())}>next anecdote</button>
       </p>
       <h1>
         Anecdote with most votes
