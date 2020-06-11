@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Persons = ({persons, filterField}) => {
     const to_show = persons.filter(person => person.name.toLocaleLowerCase().includes(filterField.toLocaleLowerCase()))
@@ -53,15 +54,16 @@ const InputForms = ({persons, setPersons, setNewName, setNewNum, newName, newNum
 }
 
 const App = () => {
-    const [persons, setPersons] = useState([
-        { name: 'Arto Hellas', number: '040-123456' },
-        { name: 'Ada Lovelace', number: '39-44-5323523' },
-        { name: 'Dan Abramov', number: '12-43-234345' },
-        { name: 'Mary Poppendieck', number: '39-23-6423122' }
-      ])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNum] = useState('')
   const [filterField, setFilterField] = useState('')
+
+  useEffect(()=> {
+    axios
+        .get('http://localhost:3001/persons')
+        .then(response => setPersons(response.data))
+  }, [])
 
 
   const handle_filter = (event) => setFilterField(event.target.value)
