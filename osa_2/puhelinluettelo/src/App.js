@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import numberService from './services/numberServices'
 
-const Persons = ({persons, filterField}) => {
+const Persons = ({persons, filterField, setPersons}) => {
     const to_show = persons.filter(person => person.name.toLocaleLowerCase().includes(filterField.toLocaleLowerCase()))
     return(
     <ul>
-        {to_show.map(to_show => <li key={to_show.name}> <DisplayPerson to_show = {to_show}/></li>)}
+        {to_show.map(to_show => <li key={to_show.name}> <DisplayPerson to_show = {to_show} persons = {persons} setPersons={setPersons}/></li>)}
     </ul>
     )
 }
 
-const DisplayPerson = ({to_show}) => <div>{to_show.name} {to_show.number}</div>
+const DisplayPerson = ({to_show, setPersons}) => 
+{
+  return (
+  <div>{to_show.name} {to_show.number}
+  <button onClick = {() => RemoveName(to_show, setPersons)}> delete</button>
+  </div>
+  )
+}
 
 const FilterForm = ({handle_filter}) => {
   return(
@@ -30,9 +37,20 @@ const AddName = (persons, setPersons, setNewName, setNewNum, newName, newNumber)
       window.alert(`${newName} is already added to phonebook`)
       return
   }
-  setPersons(persons.concat(person_info))
+  numberService
+    .addPerson(person_info)
+    .then(return_val => {setPersons(persons.concat(return_val))})
   setNewName('')
   setNewNum('')
+}
+
+const RemoveName = (to_show, setPersons) => {
+    numberService
+      .removePerson(to_show)
+      .then(()=> {
+        numberService
+          .getData()
+          .then(initialPersons => {setPersons(initialPersons)})})
 }
 
 const InputForms = ({persons, setPersons, setNewName, setNewNum, newName, newNumber, handle_name_input, handle_num_input}) => {
@@ -60,11 +78,10 @@ const App = () => {
   const [filterField, setFilterField] = useState('')
 
   useEffect(()=> {
-    axios
-        .get('http://localhost:3001/persons')
-        .then(response => setPersons(response.data))
+    numberService
+      .getData()
+      .then(initialPersons => {setPersons(initialPersons)})
   }, [])
-
 
   const handle_filter = (event) => setFilterField(event.target.value)
 
@@ -82,7 +99,7 @@ const App = () => {
                     newName = {newName} setNewName ={setNewName}
                     handle_num_input = {handle_num_input} handle_name_input = {handle_name_input}/>
       <h2>Numbers</h2>
-        <Persons persons = {persons} filterField = {filterField}/>
+        <Persons persons = {persons} filterField = {filterField} setPersons = {setPersons}/>
     </div>
   )
 
