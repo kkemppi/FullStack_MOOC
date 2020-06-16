@@ -19,11 +19,7 @@ const removePerson = (to_show) => {
 }
 
 const update = (person_info) => {
-    if (window.confirm(`${person_info.name} is already added to phonebook, replace old number with new one?`)) {
-        const request = axios.put(`${baseUrl}/${person_info.id}`, person_info)
-        return request.then(response => response)
-    }
-    return getData()
+        return axios.put(`${baseUrl}/${person_info.id}`, person_info)
 }
 
 export default {getData, addPerson, removePerson, update}
