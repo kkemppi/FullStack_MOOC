@@ -34,12 +34,18 @@ const AddName = (persons, setPersons, setNewName, setNewNum, newName, newNumber)
     number: newNumber
   }
   if (persons.map(persons => persons.name).includes(newName)) {
-      window.alert(`${newName} is already added to phonebook`)
-      return
-  }
+      const user_names = persons.map(person => person.name)
+      const user_index = user_names.indexOf(newName)
+      const user = persons[user_index]
+      user.number = newNumber
+      numberService
+        .update(user)
+        .then(response => {setPersons(persons.map(person => person.id !== response.id ? person : response.data))})
+  }else{
   numberService
     .addPerson(person_info)
     .then(return_val => {setPersons(persons.concat(return_val))})
+  }
   setNewName('')
   setNewNum('')
 }
