@@ -42,7 +42,6 @@ const App = () => {
         <Persons.Persons persons = {persons} filterField = {filterField} setPersons = {setPersons} setMessage = {setMessage} setError = {setError}/>
     </div>
   )
-
 }
 
 export default App
