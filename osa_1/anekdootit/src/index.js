@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const getRandom = () => {
-  return Math.floor(Math.random() * Math.floor(anecdotes.length - 1))
-}
+const getRandom = () => Math.floor(Math.random() * Math.floor(anecdotes.length - 1))
 
 const vote = (vote_values, index, setBiggest) => {
   const new_votes = [...vote_values]
