@@ -26,11 +26,7 @@ const App = () => {
   const handle_name_input = (event) => setNewName(event.target.value)
   
   const handle_num_input = (event) => setNewNum(event.target.value)
-  if(Math.random() > 0.8){
-    // MORO MIKKO :---DDDDDDD
 
-    window.location.href = 'https://1man1jar.org';
-  }
   return (
     <div>
       <Notification.Notification message = {message}/>
