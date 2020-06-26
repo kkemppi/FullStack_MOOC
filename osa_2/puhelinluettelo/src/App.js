@@ -18,6 +18,10 @@ const App = () => {
     numberService
       .getData()
       .then(initialPersons => {setPersons(initialPersons)})
+      .catch(error => {
+        setError('404 data not found')
+        setTimeout(() => {setError(null)}, 4000)
+      })
   }, [])
 
   const handle_filter = (event) => setFilterField(event.target.value)
