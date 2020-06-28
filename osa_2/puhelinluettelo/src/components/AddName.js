@@ -21,7 +21,7 @@ const AddName = (persons, setPersons, setNewName, setNewNum, newName, newNumber,
           setTimeout(() => {setError(null)}, 4000)
         })
   }
-  if (!(persons.map(persons => persons.name).includes(newName))) {
+  else if (!(persons.map(persons => persons.name).includes(newName))) {
   numberService
     .addPerson(person_info)
     .then(return_val => {setPersons(persons.concat(return_val))},

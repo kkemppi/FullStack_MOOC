@@ -26,7 +26,6 @@ const App = () => {
 
   const handle_filter = (event) => setFilterField(event.target.value)
   
-  
   const handle_name_input = (event) => setNewName(event.target.value)
   
   const handle_num_input = (event) => setNewNum(event.target.value)
