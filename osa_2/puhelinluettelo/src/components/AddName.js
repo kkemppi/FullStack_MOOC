@@ -27,6 +27,11 @@ const AddName = (persons, setPersons, setNewName, setNewNum, newName, newNumber,
     .then(return_val => {setPersons(persons.concat(return_val))},
           setMessage(`Added ${newName}`),
           setTimeout(() => {setMessage(null)}, 4000))
+    .catch(error => {
+      setMessage(null)
+      setError(error.response.data.error)
+      setTimeout(() => {setError(null)}, 4000)
+    })
   }
   setNewName('')
   setNewNum('')
