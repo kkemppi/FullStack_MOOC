@@ -1,0 +1,42 @@
+{
+  "name": "osa_4",
+  "version": "1.0.0",
+  "description": "blogisovelluksen backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint .",
+    "build:ui": "rm -rf build && cd ../xxx && npm run build --prod && cp -r build ../blog",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkemppi/FullStack_Osa_3.git"
+  },
+  "author": "Mikko Kemppi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kkemppi/FullStack_Osa_3/issues"
+  },
+  "homepage": "https://github.com/kkemppi/FullStack_Osa_3#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.2.0",
+    "marked": "^1.1.0",
+    "mongoose": "^5.9.20",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "^1.10.0",
+    "static": "^2.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.3.1",
+    "nodemon": "^2.0.4"
+  },
+  "keywords": []
+}
