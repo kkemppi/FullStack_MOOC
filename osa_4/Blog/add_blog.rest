@@ -1,9 +1,10 @@
-POST http://localhost:3003/api/blogs
+POST http://localhost:3003/api/blogs/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOiI1ZjA0OWM4OWUxMDZhYjU2OGMwNTZiMzEiLCJpYXQiOjE1OTQxMzc5ODJ9.AUDpw_aikemXcnkkDGNMPOR0X0o4PexHCk0_H35N7Zg
 
-{ 
-    "title": "Testi1",
-    "author": "Joni Maisema",
-    "url": "testURL",
-    "likes": 1
+{   
+    "title": "Blog test1",
+    "author": "Author test1",
+    "url": "TestURL",
+    "likes": 0
 }

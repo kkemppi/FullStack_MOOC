@@ -27,7 +27,7 @@ const mostBlogs = (blogs) => {
 
 const mostLikes = (blogs) => {
     const authors = []
-    lodash.forEach(blogs, (value, key) => {
+    lodash.forEach(blogs, (value) => {
         if (!authors.find(author => value.author === author.author)) {
             const new_author = value.author
             const init_likes = value.likes

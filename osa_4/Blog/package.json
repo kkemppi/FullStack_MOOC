@@ -4,14 +4,14 @@
   "description": "blogisovelluksen backend",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node index.js",
-    "test": "jest --verbose",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "logs:prod": "heroku logs --tail",
     "lint": "eslint .",
     "build:ui": "rm -rf build && cd ../xxx && npm run build --prod && cp -r build ../blog",
     "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy"
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -24,10 +24,13 @@
   },
   "homepage": "https://github.com/kkemppi/FullStack_Osa_3#readme",
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "inquirer": "^7.2.0",
+    "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "marked": "^1.1.0",
     "mongoose": "^5.9.20",
@@ -37,8 +40,10 @@
   },
   "devDependencies": {
     "eslint": "^7.3.1",
+    "express-async-errors": "^3.1.1",
     "jest": "^26.1.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
   },
   "jest": {
     "testEnvironment": "node"
