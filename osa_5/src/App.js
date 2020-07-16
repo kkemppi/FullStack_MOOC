@@ -32,7 +32,7 @@ const App = () => {
     fetchData()
 
   }, [])
-  
+
   useEffect(() => {
     const sorted = blogs.sort((a, b) => b.likes - a.likes)
     setBlogs(sorted)
@@ -40,9 +40,9 @@ const App = () => {
 
   const blogForm = () => {
     return(
-    <Toggleable buttonLabel = "new blog" ref = {blogFormRef}>
-      <BlogForm createBlog = {addBlog} blogs = {blogs} blogFormRef = {blogFormRef}></BlogForm>
-    </Toggleable>
+      <Toggleable buttonLabel = "new blog" ref = {blogFormRef}>
+        <BlogForm createBlog = {addBlog} blogs = {blogs} blogFormRef = {blogFormRef}></BlogForm>
+      </Toggleable>
     )
   }
 
@@ -50,7 +50,7 @@ const App = () => {
     if (props.message === null) {
       return null
     }
-    return ( 
+    return (
       <div className="success">{props.message}</div>
     )
   }
@@ -88,48 +88,48 @@ const App = () => {
     event.preventDefault()
     window.localStorage.removeItem('loggedUser')
     setUser(null)
-}
+  }
 
   const loginForm = () => (
     <div>
       <h1>log in to application</h1>
 
-    <form onSubmit={handleLogin}>
-      <div>
+      <form onSubmit={handleLogin}>
+        <div>
         username
           <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={({ target }) => setUsername(target.value)}
-        />
-      </div>
-      <div>
+            type="text"
+            value={username}
+            name="Username"
+            onChange={({ target }) => setUsername(target.value)}
+          />
+        </div>
+        <div>
         password
           <input
-          type="password"
-          value={password}
-          name="Password"
-          onChange={({ target }) => setPassword(target.value)}
-        />
-      </div>
-      <button type="submit">login</button>
-    </form>
-    </div>  
+            type="password"
+            value={password}
+            name="Password"
+            onChange={({ target }) => setPassword(target.value)}
+          />
+        </div>
+        <button type="submit">login</button>
+      </form>
+    </div>
   )
 
   return (
     <div>
-    <Notification message = {message}></Notification>
-    {user === null ?
-      loginForm() :
-      <BlogDisplay user = {user}
-         handleLogout = {handleLogout}
-         blogs = {blogs}
-         blogForm={blogForm}
-         setBlogs={setBlogs}>
-      </BlogDisplay>
-    }
+      <Notification message = {message}></Notification>
+      {user === null ?
+        loginForm() :
+        <BlogDisplay user = {user}
+          handleLogout = {handleLogout}
+          blogs = {blogs}
+          blogForm={blogForm}
+          setBlogs={setBlogs}>
+        </BlogDisplay>
+      }
     </div>
   )
 }

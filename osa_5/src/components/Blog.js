@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import '../App.css'
 import blogService from '../services/blogs'
 
@@ -10,7 +10,7 @@ const Blog = ({ blog, setBlogs, user }) => {
 
   const addLike = () => {
     setLikes(likes+1)
-    const payload = {...blog}
+    const payload = { ...blog }
     payload.user = blog.user.id
     payload.likes = likes
     blogService.updateBlog(payload)
@@ -24,12 +24,12 @@ const Blog = ({ blog, setBlogs, user }) => {
   }
 
   return (
-  !full 
-  ?
-    <div className="blogStyle">
-      {blog.title} {blog.author} <button onClick={() => toggleFull()}>view</button>
-    </div>
-  :
+    !full
+      ?
+      <div className="blogStyle">
+        {blog.title} {blog.author} <button onClick={() => toggleFull()}>view</button>
+      </div>
+      :
       <div className="blogStyle">
         {blog.title} {blog.author} <button onClick={() => toggleFull()}>hide</button><br/>
         {blog.url}<br/>
