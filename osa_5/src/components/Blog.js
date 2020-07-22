@@ -31,11 +31,13 @@ const Blog = ({ blog, setBlogs, user }) => {
       </div>
       :
       <div className="blogStyle">
-        {blog.title} {blog.author} <button onClick={() => toggleFull()}>hide</button><br/>
-        {blog.url}<br/>
-        likes {likes} <button onClick={() => addLike()}>like</button><br/>
-        {blog.user.name}<br/>
-        {user.username === blog.user.username ? <button onClick={() => deleteBlog()}>remove</button> : null}
+        {blog.title} {blog.author} <button onClick={() => toggleFull()}>hide</button> <br/>
+        {blog.url} <br/>
+        likes {likes} <button onClick={() => addLike()}>like</button> <br/>
+        {blog.user.name} <br/>
+        {user.username === blog.user.username 
+        ? <button onClick={() => deleteBlog()}>remove</button>
+         : null}
       </div>
   )
 }
