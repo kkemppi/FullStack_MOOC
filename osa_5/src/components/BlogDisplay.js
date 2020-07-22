@@ -3,7 +3,7 @@ import Blog from './Blog'
 import PropTypes from 'prop-types'
 
 
-const BlogDisplay = ({ user, handleLogout, blogs, blogForm, setBlogs }) => {
+const BlogDisplay = ({ user, handleLogout, blogs, blogForm, setBlogs, addLike, deleteBlog }) => {
 
   return (
     <div>
@@ -15,7 +15,7 @@ const BlogDisplay = ({ user, handleLogout, blogs, blogForm, setBlogs }) => {
       {blogForm()}
       <br/>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} setBlogs={setBlogs} user={user}/>
+        <Blog key={blog.id} blog={blog} setBlogs={setBlogs} user={user} addLike={addLike} deleteBlog={deleteBlog}/>
       )}
     </div>
   )

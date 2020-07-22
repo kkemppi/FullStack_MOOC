@@ -12,6 +12,7 @@ const App = () => {
   const [message, setMessage] = useState(null)
   const [user, setUser] = useState(null)
   const [blogs, setBlogs] = useState([])
+  const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
 
   const blogFormRef = useRef()
 
@@ -27,16 +28,29 @@ const App = () => {
   useEffect(() => {
     async function fetchData() {
       const blogData = await blogService.getAll()
+      blogData.sort((a, b) => b.likes - a.likes)
       setBlogs(blogData)
     }
     fetchData()
 
   }, [])
 
-  useEffect(() => {
-    const sorted = blogs.sort((a, b) => b.likes - a.likes)
-    setBlogs(sorted)
-  }, [blogs])
+  const addLike = async (blog) => {
+    setBlogs(blogs.map(item => 
+      item.id === blog.id ? {...item, likes: item.likes+1} : item))
+
+    let payload = { ...blog }
+    payload.user = blog.user.id
+    payload.likes = blog.likes++
+    await blogService.updateBlog(payload)
+  }
+
+  const deleteBlog = async (blog) => {
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      const request = await blogService.deleteBlog(blog.id)
+      setBlogs(request)
+    }
+  }
 
   const blogForm = () => {
     return(
@@ -125,9 +139,11 @@ const App = () => {
         loginForm() :
         <BlogDisplay user = {user}
           handleLogout = {handleLogout}
-          blogs = {blogs}
+          blogs = {sortedBlogs}
           blogForm={blogForm}
-          setBlogs={setBlogs}>
+          setBlogs={setBlogs}
+          addLike={addLike}
+          deleteBlog={deleteBlog}>
         </BlogDisplay>
       }
     </div>
