@@ -47,7 +47,7 @@ test('renders expanded content', () => {
   expect(component.container).toHaveTextContent('test_title test_author hide test_url likes 0 like test_name remove')
 })
 
-test.only('pressing like twice', async () => {
+test('pressing like twice', async () => {
   const blog = {
     title: 'test_title',
     author: 'test_author',
@@ -62,17 +62,16 @@ test.only('pressing like twice', async () => {
     name: "test_name"
   }
   
+  const mockHandler = jest.fn()
   
   const component = render(
-    <Blog blog={blog} user={user}/>
+    <Blog blog={blog} user={user} addLike={mockHandler}/>
     )
     
   const button = component.getByText('view')
   fireEvent.click(button)
     
   const likeButton = component.getByText('like')
-  const mockHandler = jest.fn()
-  likeButton.onclick = () => mockHandler()
 
   fireEvent.click(likeButton)
   fireEvent.click(likeButton)
