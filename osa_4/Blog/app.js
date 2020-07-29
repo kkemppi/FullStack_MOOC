@@ -11,18 +11,18 @@ const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('connected to MongoDB')
-    })
-    .catch((error) => {
-        console.log('error connection to MongoDB:', error.message)
-    })
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
 
 
 morgan.token('content', function getBody(req) {
-    if(req.method === 'POST'){
-        return(JSON.stringify(req.body))}
-    return null
+  if(req.method === 'POST'){
+    return(JSON.stringify(req.body))}
+  return null
 })
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :content'))
 
@@ -34,6 +34,12 @@ app.use(middleware.tokenExtractor)
 app.use('/api/users', usersRouter)
 app.use('/api/blogs', blogsRouter)
 app.use('/api/login', loginRouter)
+
+if (process.env.NODE_ENV === 'test') {
+  const testingRouter = require('./controllers/testing')
+  app.use('/api/testing', testingRouter)
+}
+
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
