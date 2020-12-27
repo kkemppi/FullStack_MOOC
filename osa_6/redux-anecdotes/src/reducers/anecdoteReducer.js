@@ -1,5 +1,4 @@
 import anecdoteService from '../services/anecdotes'
-import { postAnecdote } from '../services/anecdotes'
 
 const getId = () => (100000 * Math.random()).toFixed(0)
 
